@@ -1,4 +1,5 @@
 #pragma once
+#include <stddef.h>
 #include <stdint.h>
 #include <assert.h>
 
@@ -72,3 +73,5 @@ int SMC_ReadSystemEventFlag(uint8_t* flag);
 int SMC_SetNotificationLED(uint8_t mask);
 
 int SMC_SetODDPower(int power);
+
+uint32_t crc32(uint32_t seed, const void* data, size_t len);

@@ -110,3 +110,21 @@ int SMC_SetODDPower(int power)
 {
     return bspWrite("SMC", 0, "ODDPower", 4, &power);
 }
+
+uint32_t crc32(uint32_t seed, const void* data, size_t len)
+{
+    uint32_t crc = seed;
+    const uint8_t* src = data;
+    uint32_t mult;
+    int i;
+
+    while (len--) {
+        crc ^= *src++;
+        for (i = 0; i < 8; i++) {
+            mult = (crc & 1) ? 0xedb88320 : 0;
+            crc = (crc >> 1) ^ mult;
+        }
+    }
+
+    return crc;
+}
